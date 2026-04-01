@@ -41,10 +41,13 @@ try {
 
     const packageName = monoPackage?.name?.replace('@algofam/', '')
     console.log(`[${pkg.name}]: Processing package ${monoPackage?.name}`)
+    console.log(`[${pkg.name}]: Current working directory: ${process.cwd()}`)
+    console.log(`[${pkg.name}]: NPM_CONFIG_PROVENANCE before: ${process.env.NPM_CONFIG_PROVENANCE}`)
     if (monoPackage?.publishConfig?.provenance === true && !process.env.NPM_CONFIG_PROVENANCE) {
         console.log(`[${pkg.name}]: Setting NPM_CONFIG_PROVENANCE=true for ${monoPackage.name}`)
         process.env.NPM_CONFIG_PROVENANCE = 'true'
     }
+    console.log(`[${pkg.name}]: NPM_CONFIG_PROVENANCE after: ${process.env.NPM_CONFIG_PROVENANCE}`)
 
     const options: Options = {
         tagFormat: packageName ? `${packageName}@\${version}` : undefined,
