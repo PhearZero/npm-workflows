@@ -1,3 +1,10 @@
+# [core@1.2.0-canary.2](https://github.com/PhearZero/npm-workflows/compare/core@1.2.0-canary.1...core@1.2.0-canary.2) (2026-04-01)
+
+
+### Bug Fixes
+
+* error in metadata save check ([20a87f3](https://github.com/PhearZero/npm-workflows/commit/20a87f30a88e12a0e122897e3edf06804a402788))
+
 # [core@1.2.0-canary.1](https://github.com/PhearZero/npm-workflows/compare/core@1.1.0...core@1.2.0-canary.1) (2026-04-01)
 
 
