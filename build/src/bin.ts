@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { createRequire } from 'node:module'
+import fs from 'node:fs'
 
 import { cosmiconfig } from 'cosmiconfig'
 import meow from 'meow'
@@ -89,7 +90,7 @@ try {
 
     const inlinePlugin = createInlinePlugin(semanticConfig)
 
-    await semanticRelease(
+    const result = await semanticRelease(
         { ...options, ...inlinePlugin },
         {
             cwd: monoContext.cwd,
@@ -98,6 +99,10 @@ try {
             stdout: new RescopedStream(monoContext.stdout, pkg.name) as any,
         },
     )
+
+    if (result && process.env.GITHUB_OUTPUT) {
+        fs.appendFileSync(process.env.GITHUB_OUTPUT, 'released=true\n')
+    }
 
     process.exit(0)
 } catch (error) {
