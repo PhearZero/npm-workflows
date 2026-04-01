@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/phearzero/npm-workflows.git",
+    "url": "git+https://github.com/PhearZero/npm-workflows.git",
     "directory": "build"
   },
   "dependencies": {
