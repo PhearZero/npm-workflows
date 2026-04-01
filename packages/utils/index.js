@@ -12,3 +12,5 @@ export function decode(base64url) {
     .replace(/_/g, '/');
   return Buffer.from(base64, 'base64');
 }
+
+export function isBuffer(buffer) { return Buffer.isBuffer(buffer); }
