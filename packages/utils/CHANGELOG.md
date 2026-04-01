@@ -1,3 +1,10 @@
+# [utils@1.0.0-canary.3](https://github.com/PhearZero/npm-workflows/compare/utils@1.0.0-canary.2...utils@1.0.0-canary.3) (2026-04-01)
+
+
+### Features
+
+* cross package feature ([7d3e765](https://github.com/PhearZero/npm-workflows/commit/7d3e7659528d7a500cca03846726fb75cd06ad3b))
+
 # [utils@1.0.0-canary.2](https://github.com/PhearZero/npm-workflows/compare/utils@1.0.0-canary.1...utils@1.0.0-canary.2) (2026-04-01)
 
 
