@@ -31,7 +31,17 @@ const cli = meow(
         $ semantic-release-monorepo --debug
 `,
     {
-        flags: {},
+        flags: {
+            ci: {
+                type: 'boolean',
+            },
+            debug: {
+                type: 'boolean',
+            },
+            dryRun: {
+                type: 'boolean',
+            },
+        },
         importMeta: import.meta,
     },
 )
@@ -55,6 +65,7 @@ try {
         ...rawSemanticConfig?.config,
         ...cli.flags,
     }
+    console.log(`[${pkg.name}]: Dry run: ${options.dryRun}`)
     console.log(`[${pkg.name}]: Using options ${JSON.stringify(options, null, 2)}`)
 
     if (options.plugins) {
@@ -100,7 +111,7 @@ try {
         },
     )
 
-    if (result && process.env.GITHUB_OUTPUT) {
+    if (result && !options.dryRun && process.env.GITHUB_OUTPUT) {
         fs.appendFileSync(process.env.GITHUB_OUTPUT, 'released=true\n')
     }
 
