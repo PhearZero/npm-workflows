@@ -37,12 +37,7 @@
           ]
         }
       ],
-      [
-        "@semantic-release/github",
-        {
-          "successComment": false
-        }
-      ]
+      "@semantic-release/github"
     ],
     "branches": [
       "release",

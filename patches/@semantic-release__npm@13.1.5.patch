@@ -1,0 +1,37 @@
+diff --git a/lib/trusted-publishing/oidc-context.js b/lib/trusted-publishing/oidc-context.js
+index 0427ae9de9da75861b5db715420c9e82a727fbb3..11b4bb742c3fb5b7031f9f3d82de98647e70ec78 100644
+--- a/lib/trusted-publishing/oidc-context.js
++++ b/lib/trusted-publishing/oidc-context.js
+@@ -2,5 +2,16 @@ import { OFFICIAL_REGISTRY } from "../definitions/constants.js";
+ import exchangeToken from "./token-exchange.js";
+ 
+ export default async function oidcContextEstablished(registry, pkg, context) {
+-  return OFFICIAL_REGISTRY === registry && !!(await exchangeToken(pkg, context));
++  if (OFFICIAL_REGISTRY !== registry) {
++    return false;
++  }
++
++  const token = await exchangeToken(pkg, context);
++
++  if (token) {
++    context.env.NPM_TOKEN = token;
++    return true;
++  }
++
++  return false;
+ }
+diff --git a/lib/verify-auth.js b/lib/verify-auth.js
+index d09933760e43b54383b470de4b320eb5a1c1c119..95e77089b8b89b6ac46a2f658d2386dd266a93df 100644
+--- a/lib/verify-auth.js
++++ b/lib/verify-auth.js
+@@ -83,9 +83,7 @@ async function verifyTokenAuth(registry, npmrc, context, pkgRoot) {
+ export default async function (npmrc, pkg, { pkgRoot }, context) {
+   const registry = getRegistry(pkg, context);
+ 
+-  if (await oidcContextEstablished(registry, pkg, context)) {
+-    return;
+-  }
++  await oidcContextEstablished(registry, pkg, context);
+ 
+   await setNpmrcAuth(npmrc, registry, context);
+ 
