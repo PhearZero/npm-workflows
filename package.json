@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "pnpm run -r test"
+    "test": "pnpm run -r test",
+    "release": "pnpm run -r --if-present release",
+    "release:dry-run": "pnpm run -r --if-present release:dry-run"
   },
   "keywords": [],
   "author": "",

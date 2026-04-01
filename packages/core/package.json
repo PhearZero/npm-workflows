@@ -5,5 +5,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "type": "module"
+  "scripts": {
+    "release": "package-releaser",
+    "release:dry-run": "package-releaser --dry-run"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@algofam/package-releaser": "workspace:*"
+  }
 }

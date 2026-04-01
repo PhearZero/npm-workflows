@@ -48,9 +48,17 @@ importers:
         specifier: ^25.0.3
         version: 25.0.3
 
-  packages/core: {}
+  packages/core:
+    devDependencies:
+      '@algofam/package-releaser':
+        specifier: workspace:*
+        version: link:../../build
 
-  packages/utils: {}
+  packages/utils:
+    devDependencies:
+      '@algofam/package-releaser':
+        specifier: workspace:*
+        version: link:../../build
 
 packages:
 

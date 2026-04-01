@@ -2,5 +2,8 @@
   "name": "@algofam/utils",
   "version": "0.0.1",
   "main": "index.js",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "@algofam/package-releaser": "workspace:*"
+  }
 }
