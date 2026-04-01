@@ -1,3 +1,10 @@
+# [utils@1.1.0-canary.3](https://github.com/PhearZero/npm-workflows/compare/utils@1.1.0-canary.2...utils@1.1.0-canary.3) (2026-04-01)
+
+
+### Features
+
+* adds catalog replacement, fixes lock files ([1ee7d03](https://github.com/PhearZero/npm-workflows/commit/1ee7d03116561bd73919626ce45c8d3d09f9b2d0))
+
 # [utils@1.1.0-canary.2](https://github.com/PhearZero/npm-workflows/compare/utils@1.1.0-canary.1...utils@1.1.0-canary.2) (2026-04-01)
 
 
