@@ -12,6 +12,7 @@ export class Account {
   }
 
   save(metadata) {
+    if(typeof metadata !== 'object') throw new Error("Metadata must be an object");
     this.metadata = metadata;
   }
 }
