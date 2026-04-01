@@ -7,4 +7,7 @@ export class Account {
   getAddress() {
     return this.address;
   }
+  getMetadata() {
+    return this.metadata;
+  }
 }
