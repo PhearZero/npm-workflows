@@ -1,3 +1,17 @@
+# [utils@1.1.0-canary.1](https://github.com/PhearZero/npm-workflows/compare/utils@1.0.0...utils@1.1.0-canary.1) (2026-04-01)
+
+
+### Bug Fixes
+
+* disable patch and test multi-semantic-release ([bbfc015](https://github.com/PhearZero/npm-workflows/commit/bbfc0158cb65493608d7e6a9fe746b94c04b10d3))
+* update release cli to use pnpm workspace replacement ([64f07ba](https://github.com/PhearZero/npm-workflows/commit/64f07ba44e4b96ec2142b35dbe657038afae0021))
+* wrap multi-release tp exclude build for now ([376a38f](https://github.com/PhearZero/npm-workflows/commit/376a38f5899c6e75e7113e7e99f754c66313c153))
+
+
+### Features
+
+* is number ([6b324bd](https://github.com/PhearZero/npm-workflows/commit/6b324bd342a91d78d5fd76f6e41ceba33750681c))
+
 # utils@1.0.0 (2026-04-01)
 
 
