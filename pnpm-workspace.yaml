@@ -1,5 +1,5 @@
 packages:
   - 'packages/*'
   - 'build'
-#patchedDependencies:
-#  '@semantic-release/npm@13.1.5': patches/@semantic-release__npm@13.1.5.patch
+patchedDependencies:
+  '@semantic-release/npm@13.1.5': patches/@semantic-release__npm@13.1.5.patch
