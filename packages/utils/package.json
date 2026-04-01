@@ -17,6 +17,6 @@
     "directory": "packages/utils"
   },
   "devDependencies": {
-    "@algofam/package-releaser": "0.0.1"
+    "@algofam/package-releaser": "workspace:*"
   }
 }

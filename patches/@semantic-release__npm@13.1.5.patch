@@ -1,8 +1,16 @@
 diff --git a/lib/set-npmrc-auth.js b/lib/set-npmrc-auth.js
-index a8534ca7712c46c2bd430c3aadab7e2beca8e3d3..e38a2b1d7ad2bb4925fc77908b9a4519aceca517 100644
+index a8534ca7712c46c2bd430c3aadab7e2beca8e3d3..b9235beb2af0fedfc43edb3b5d783caeee1260ee 100644
 --- a/lib/set-npmrc-auth.js
 +++ b/lib/set-npmrc-auth.js
-@@ -29,9 +29,9 @@ export default async function (npmrc, registry, { cwd, env: { NPM_TOKEN, NPM_CON
+@@ -21,18 +21,19 @@ export default async function (npmrc, registry, { cwd, env: { NPM_TOKEN, NPM_CON
+ 
+   const currentConfig = configs ? (await Promise.all(configs.map((config) => fs.readFile(config)))).join("\n") : "";
+ 
+-  if (getAuthToken(registry, { npmrc: rcConfig })) {
+-    await fs.outputFile(npmrc, currentConfig);
+-    return;
+-  }
+-
    if (NPM_TOKEN) {
      await fs.outputFile(
        npmrc,
@@ -10,10 +18,19 @@ index a8534ca7712c46c2bd430c3aadab7e2beca8e3d3..e38a2b1d7ad2bb4925fc77908b9a4519
 +      `${currentConfig ? `${currentConfig}\n` : ""}${nerfDart(registry)}:_authToken = ${NPM_TOKEN}`
      );
 -    logger.log(`Wrote NPM_TOKEN to ${npmrc}`);
+-  } else {
+-    throw new AggregateError([getError("ENONPMTOKEN", { registry })]);
 +    logger.log(`Wrote literal token to ${npmrc}`);
-   } else {
-     throw new AggregateError([getError("ENONPMTOKEN", { registry })]);
++    return;
    }
++
++  if (getAuthToken(registry, { npmrc: rcConfig })) {
++    await fs.outputFile(npmrc, currentConfig);
++    return;
++  }
++
++  throw new AggregateError([getError("ENONPMTOKEN", { registry })]);
+ }
 diff --git a/lib/trusted-publishing/oidc-context.js b/lib/trusted-publishing/oidc-context.js
 index 0427ae9de9da75861b5db715420c9e82a727fbb3..40c553d543c1ac97141acd9171ab9f077eb4d045 100644
 --- a/lib/trusted-publishing/oidc-context.js

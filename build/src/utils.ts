@@ -46,7 +46,9 @@ interface PnpmWorkspace {
 
 export const memoizedGetWorkspaceManifest = memize(() => {
     try {
-        const workspaces: PnpmWorkspace[] = JSON.parse(execSync('pnpm list -r --depth -1 --json').toString())
+        const workspaces: PnpmWorkspace[] = JSON.parse(
+            execSync('pnpm list -r --depth -1 --json --no-frozen-lockfile').toString(),
+        )
         const workingDirectory = cwd()
         const rootDir = execSync('git rev-parse --show-toplevel').toString().trim()
 
@@ -62,7 +64,7 @@ export const memoizedGetWorkspaceManifest = memize(() => {
         const allDeps = {
             ...pkgJson.dependencies,
             ...pkgJson.devDependencies,
-            ...pkgJson.peerDependencies
+            ...pkgJson.peerDependencies,
         }
 
         const currentWorkspaceDependencies = workspaces.filter((workspace) => {
@@ -133,7 +135,9 @@ export function modifyContextCommits<TContextType extends ContextWithCommits>(
 }
 
 export function synchronizeWorkspaceDependencies(workingDirectory: string): void {
-    const workspaces: PnpmWorkspace[] = JSON.parse(execSync('pnpm list -r --depth -1 --json').toString())
+    const workspaces: PnpmWorkspace[] = JSON.parse(
+        execSync('pnpm list -r --depth -1 --json --no-frozen-lockfile').toString(),
+    )
     const pkgPath = path.join(workingDirectory, 'package.json')
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
 
@@ -150,9 +154,12 @@ export function synchronizeWorkspaceDependencies(workingDirectory: string): void
                         changed = true
                     } else if (typeof version === 'string' && version.startsWith('workspace:')) {
                         // Handle other workspace: prefix formats if needed, e.g., workspace:^
-                        const resolvedVersion = version.replace('workspace:', '') === '*' || version.replace('workspace:', '') === '^' || version.replace('workspace:', '') === '~'
-                            ? workspacePkg.version
-                            : version.replace('workspace:', '')
+                        const resolvedVersion =
+                            version.replace('workspace:', '') === '*' ||
+                            version.replace('workspace:', '') === '^' ||
+                            version.replace('workspace:', '') === '~'
+                                ? workspacePkg.version
+                                : version.replace('workspace:', '')
 
                         if (pkg[depType][name] !== resolvedVersion) {
                             pkg[depType][name] = resolvedVersion
@@ -166,5 +173,16 @@ export function synchronizeWorkspaceDependencies(workingDirectory: string): void
 
     if (changed) {
         fs.writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`)
+        updateLockfile()
+    }
+}
+
+export function updateLockfile(): void {
+    try {
+        const rootDir = execSync('git rev-parse --show-toplevel').toString().trim()
+        console.log(`[@algofam/package-releaser]: Updating lockfile in ${rootDir}`)
+        execSync('pnpm install --lockfile-only --ignore-scripts --no-frozen-lockfile', { cwd: rootDir })
+    } catch (e) {
+        console.error('Failed to update lockfile:', e)
     }
 }

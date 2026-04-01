@@ -8,7 +8,7 @@ import type {
 } from 'semantic-release'
 import type { SemanticConfigType } from 'semantic-release/lib/get-config.js'
 
-import { modifyContextCommits, modifyContextReleaseVersion, synchronizeWorkspaceDependencies } from './utils.js'
+import { modifyContextCommits, modifyContextReleaseVersion, synchronizeWorkspaceDependencies, updateLockfile } from './utils.js'
 
 export function createInlinePlugin(semanticConfig: SemanticConfigType) {
     // biome-ignore lint/suspicious/useAwait: semantic-release expect steps to return Promise
@@ -35,7 +35,9 @@ export function createInlinePlugin(semanticConfig: SemanticConfigType) {
         if (context.cwd) {
             synchronizeWorkspaceDependencies(context.cwd)
         }
-        return semanticConfig.plugins.prepare(modifyContextCommits(context, semanticConfig))
+        const result = await semanticConfig.plugins.prepare(modifyContextCommits(context, semanticConfig))
+        updateLockfile()
+        return result
     }
 
     const publish = async (_: Config, context: PublishContext) => {
