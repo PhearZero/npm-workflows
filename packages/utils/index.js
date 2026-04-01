@@ -16,3 +16,4 @@ export function decode(base64url) {
 export function isBuffer(buffer) { return Buffer.isBuffer(buffer); }
 
 export function isString(string) { return typeof string === 'string'; }
+export function isNumber(number) { return typeof number === 'number'; }
