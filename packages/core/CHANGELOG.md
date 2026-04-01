@@ -1,3 +1,10 @@
+# [core@1.2.0-canary.4](https://github.com/PhearZero/npm-workflows/compare/core@1.2.0-canary.3...core@1.2.0-canary.4) (2026-04-01)
+
+
+### Features
+
+* is Object ([fb4c581](https://github.com/PhearZero/npm-workflows/commit/fb4c581ce7da2a1b3b9048663c680f38892c279c))
+
 # [core@1.2.0-canary.3](https://github.com/PhearZero/npm-workflows/compare/core@1.2.0-canary.2...core@1.2.0-canary.3) (2026-04-01)
 
 
