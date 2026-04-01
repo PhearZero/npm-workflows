@@ -15,15 +15,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v5 # Honors the packageManager field
       - uses: actions/setup-node@v4
         with:
           node-version: '22.x'
           cache: 'pnpm'
-      - run: npm ci
-      - run: npm run build && npm ci
-      - run: ls ./node_modules/.bin
+      - run: pnpm install
+      - run: pnpm run build
       - name: Release
-        if: ${{ false }} # Skip the release step for now
-        run: npm run release
+        run: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
