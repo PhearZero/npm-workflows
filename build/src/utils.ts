@@ -84,6 +84,10 @@ export function modifyContextCommits<TContextType extends ContextWithCommits>(
     context: TContextType,
     semanticConfig: SemanticConfigType,
 ): TContextType {
+    if (!context.commits) {
+        return context
+    }
+
     const currentWorkspace = memoizedGetWorkspaceManifest()
 
     const commitsWithFilePaths = context.commits.map((commit) => {
