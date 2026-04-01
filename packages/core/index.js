@@ -11,3 +11,5 @@ export class Account {
     return this.metadata;
   }
 }
+
+export default Account;
