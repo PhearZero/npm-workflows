@@ -1,3 +1,11 @@
+# [utils@1.1.0-canary.2](https://github.com/PhearZero/npm-workflows/compare/utils@1.1.0-canary.1...utils@1.1.0-canary.2) (2026-04-01)
+
+
+### Bug Fixes
+
+* update lock file during release process ([a962f77](https://github.com/PhearZero/npm-workflows/commit/a962f778c96c45cdb594475ff5e67783ffbc6cfa))
+* workspace lists ([16112c9](https://github.com/PhearZero/npm-workflows/commit/16112c9d465da9058537f97360e4b1391f03402a))
+
 # [utils@1.1.0-canary.1](https://github.com/PhearZero/npm-workflows/compare/utils@1.0.0...utils@1.1.0-canary.1) (2026-04-01)
 
 
