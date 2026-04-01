@@ -5,6 +5,13 @@
 
 * isbuffer ([d3a9782](https://github.com/PhearZero/npm-workflows/commit/d3a978262262869b0a3e11db87b9f9e178305fb4))
 
+# [utils@1.0.0-canary.2](https://github.com/PhearZero/npm-workflows/compare/utils@1.0.0-canary.1...utils@1.0.0-canary.2) (2026-04-01)
+
+
+### Features
+
+* isbuffer ([d3a9782](https://github.com/PhearZero/npm-workflows/commit/d3a978262262869b0a3e11db87b9f9e178305fb4))
+
 # utils@1.0.0-canary.1 (2026-04-01)
 
 
