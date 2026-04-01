@@ -1,3 +1,10 @@
+# [core@1.0.0-canary.6](https://github.com/PhearZero/npm-workflows/compare/core@1.0.0-canary.5...core@1.0.0-canary.6) (2026-04-01)
+
+
+### Features
+
+* add isAccount method ([19f7812](https://github.com/PhearZero/npm-workflows/commit/19f7812079ac256eddaa7ce0133d849cf4ad3a54))
+
 # [core@1.0.0-canary.5](https://github.com/PhearZero/npm-workflows/compare/core@1.0.0-canary.4...core@1.0.0-canary.5) (2026-04-01)
 
 
