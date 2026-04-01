@@ -5,6 +5,13 @@
 
 * get metadata from address object ([15c66ec](https://github.com/PhearZero/npm-workflows/commit/15c66ec0f012823db384cbadab3c3dc97e102f78))
 
+# [core@1.0.0-canary.3](https://github.com/PhearZero/npm-workflows/compare/core@1.0.0-canary.2...core@1.0.0-canary.3) (2026-04-01)
+
+
+### Features
+
+* get metadata from address object ([15c66ec](https://github.com/PhearZero/npm-workflows/commit/15c66ec0f012823db384cbadab3c3dc97e102f78))
+
 # [core@1.0.0-canary.2](https://github.com/PhearZero/npm-workflows/compare/core@1.0.0-canary.1...core@1.0.0-canary.2) (2026-04-01)
 
 
