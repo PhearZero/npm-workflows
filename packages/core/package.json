@@ -13,8 +13,6 @@
     "directory": "packages/core"
   },
   "scripts": {
-    "release": "multi-semantic-release",
-    "release:dry-run": "package-releaser --dry-run"
   },
   "type": "module",
   "devDependencies": {

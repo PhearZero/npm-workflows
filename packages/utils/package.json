@@ -9,7 +9,6 @@
     "provenance": true
   },
   "scripts": {
-    "release": "multi-semantic-release"
   },
   "repository": {
     "type": "git",
