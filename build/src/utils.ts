@@ -1,8 +1,8 @@
 import { execSync } from 'node:child_process'
 import { EOL } from 'node:os'
-import { dirname, extname, normalize, relative, sep } from 'node:path'
+import path, { dirname, extname, normalize, relative, sep } from 'node:path'
 import { cwd } from 'node:process'
-import { readFileSync } from 'node:fs'
+import fs, { readFileSync } from 'node:fs'
 
 import memize from 'memize'
 import type { SemanticConfigType } from 'semantic-release/lib/get-config.js'
@@ -129,5 +129,42 @@ export function modifyContextCommits<TContextType extends ContextWithCommits>(
     return {
         ...context,
         commits: affectedCommits,
+    }
+}
+
+export function synchronizeWorkspaceDependencies(workingDirectory: string): void {
+    const workspaces: PnpmWorkspace[] = JSON.parse(execSync('pnpm list -r --depth -1 --json').toString())
+    const pkgPath = path.join(workingDirectory, 'package.json')
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
+
+    let changed = false
+    const dependencyTypes = ['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'] as const
+
+    for (const depType of dependencyTypes) {
+        if (pkg[depType]) {
+            for (const [name, version] of Object.entries(pkg[depType])) {
+                const workspacePkg = workspaces.find((w) => w.name === name)
+                if (workspacePkg) {
+                    if (version === 'workspace:*') {
+                        pkg[depType][name] = workspacePkg.version
+                        changed = true
+                    } else if (typeof version === 'string' && version.startsWith('workspace:')) {
+                        // Handle other workspace: prefix formats if needed, e.g., workspace:^
+                        const resolvedVersion = version.replace('workspace:', '') === '*' || version.replace('workspace:', '') === '^' || version.replace('workspace:', '') === '~'
+                            ? workspacePkg.version
+                            : version.replace('workspace:', '')
+
+                        if (pkg[depType][name] !== resolvedVersion) {
+                            pkg[depType][name] = resolvedVersion
+                            changed = true
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (changed) {
+        fs.writeFileSync(pkgPath, `${JSON.stringify(pkg, null, 2)}\n`)
     }
 }

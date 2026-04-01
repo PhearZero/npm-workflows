@@ -13,8 +13,12 @@
     "directory": "packages/core"
   },
   "scripts": {
+    "release": "package-releaser"
   },
   "type": "module",
+  "dependencies": {
+    "@algofam/utils": "workspace:*"
+  },
   "devDependencies": {
     "@algofam/package-releaser": "workspace:*"
   }

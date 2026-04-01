@@ -55,6 +55,10 @@ importers:
         version: 25.0.3(typescript@5.9.3)
 
   packages/core:
+    dependencies:
+      '@algofam/utils':
+        specifier: workspace:*
+        version: link:../utils
     devDependencies:
       '@algofam/package-releaser':
         specifier: workspace:*
