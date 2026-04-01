@@ -20,6 +20,7 @@
     "@semantic-release/npm": "^13.1.4",
     "@semantic-release/release-notes-generator": "^14.1.0",
     "@types/node": "^25.2.2",
+    "multi-semantic-release": "^3.1.0",
     "typescript": "^5.9.3"
   },
   "release": {
@@ -27,10 +28,7 @@
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
       "@semantic-release/changelog",
-      ["@semantic-release/npm", { "npmPublish": false }],
-      ["@semantic-release/exec", {
-        "publishCmd": "pnpm publish --no-git-checks"
-      }],
+      "@semantic-release/npm",
       [
         "@semantic-release/git",
         {
