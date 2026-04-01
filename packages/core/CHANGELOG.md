@@ -1,3 +1,10 @@
+# [core@1.2.0-canary.1](https://github.com/PhearZero/npm-workflows/compare/core@1.1.0...core@1.2.0-canary.1) (2026-04-01)
+
+
+### Features
+
+* save metadata in Account class ([cee86ee](https://github.com/PhearZero/npm-workflows/commit/cee86ee2e3048fd20960296ec57c3d2016fd46da))
+
 # [core@1.1.0](https://github.com/PhearZero/npm-workflows/compare/core@1.0.0...core@1.1.0) (2026-04-01)
 
 
