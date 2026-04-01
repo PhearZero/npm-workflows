@@ -4,12 +4,18 @@ import type {
     GenerateNotesContext,
     PrepareContext,
     PublishContext,
+    VerifyConditionsContext,
 } from 'semantic-release'
 import type { SemanticConfigType } from 'semantic-release/lib/get-config.js'
 
 import { modifyContextCommits, modifyContextReleaseVersion } from './utils.js'
 
 export function createInlinePlugin(semanticConfig: SemanticConfigType) {
+    // biome-ignore lint/suspicious/useAwait: semantic-release expect steps to return Promise
+    const verifyConditions = async (_: Config, context: VerifyConditionsContext) => {
+        return semanticConfig.plugins.verifyConditions(modifyContextCommits(context as any, semanticConfig))
+    }
+
     // biome-ignore lint/suspicious/useAwait: semantic-release expect steps to return Promise
     const analyzeCommits = async (_: Config, context: AnalyzeCommitsContext) => {
         return semanticConfig.plugins.analyzeCommits(modifyContextCommits(context, semanticConfig))
@@ -34,6 +40,7 @@ export function createInlinePlugin(semanticConfig: SemanticConfigType) {
     }
 
     const inlinePlugin = {
+        verifyConditions,
         analyzeCommits,
         generateNotes,
         prepare,
