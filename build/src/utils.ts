@@ -42,6 +42,7 @@ interface PnpmWorkspace {
     name: string
     version: string
     path: string
+    private: boolean
 }
 
 export const memoizedGetWorkspaceManifest = memize(() => {
@@ -135,11 +136,13 @@ export function modifyContextCommits<TContextType extends ContextWithCommits>(
 }
 
 export function synchronizeWorkspaceDependencies(workingDirectory: string): void {
-    const workspaces: PnpmWorkspace[] = JSON.parse(
-        execSync('pnpm list -r --depth -1 --json').toString(),
+    const workspaces: (PnpmWorkspace & { dependencies?: any; devDependencies?: any; peerDependencies?: any; optionalDependencies?: any })[] = JSON.parse(
+        execSync('pnpm list -r --json').toString(),
     )
     const pkgPath = path.join(workingDirectory, 'package.json')
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
+
+    const currentWorkspaceInfo = workspaces.find(w => path.normalize(w.path) === path.normalize(workingDirectory))
 
     let changed = false
     const dependencyTypes = ['dependencies', 'devDependencies', 'peerDependencies', 'optionalDependencies'] as const
@@ -149,6 +152,15 @@ export function synchronizeWorkspaceDependencies(workingDirectory: string): void
             for (const [name, version] of Object.entries(pkg[depType])) {
                 const workspacePkg = workspaces.find((w) => w.name === name)
                 if (workspacePkg) {
+                    if (workspacePkg.private) {
+                        // Exclude private packages, they must remain workspace: reference
+                        if (version !== 'workspace:*') {
+                            pkg[depType][name] = 'workspace:*'
+                            changed = true
+                        }
+                        continue
+                    }
+
                     if (version === 'workspace:*') {
                         pkg[depType][name] = workspacePkg.version
                         changed = true
@@ -165,6 +177,12 @@ export function synchronizeWorkspaceDependencies(workingDirectory: string): void
                             pkg[depType][name] = resolvedVersion
                             changed = true
                         }
+                    }
+                } else if (typeof version === 'string' && version.startsWith('catalog:') && currentWorkspaceInfo) {
+                    const resolvedDep = currentWorkspaceInfo[depType]?.[name]
+                    if (resolvedDep && resolvedDep.version) {
+                        pkg[depType][name] = resolvedDep.version
+                        changed = true
                     }
                 }
             }
