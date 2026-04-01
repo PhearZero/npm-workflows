@@ -10,6 +10,10 @@ export class Account {
   getMetadata() {
     return this.metadata;
   }
+
+  save(metadata) {
+    this.metadata = metadata;
+  }
 }
 
 export default Account;
