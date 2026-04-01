@@ -5,6 +5,25 @@
 
 * disable patch and test multi-semantic-release ([bbfc015](https://github.com/PhearZero/npm-workflows/commit/bbfc0158cb65493608d7e6a9fe746b94c04b10d3))
 * error in metadata save check ([20a87f3](https://github.com/PhearZero/npm-workflows/commit/20a87f30a88e12a0e122897e3edf06804a402788))
+* update lock file during release process ([a962f77](https://github.com/PhearZero/npm-workflows/commit/a962f778c96c45cdb594475ff5e67783ffbc6cfa))
+* update release cli to use pnpm workspace replacement ([64f07ba](https://github.com/PhearZero/npm-workflows/commit/64f07ba44e4b96ec2142b35dbe657038afae0021))
+* workspace lists ([16112c9](https://github.com/PhearZero/npm-workflows/commit/16112c9d465da9058537f97360e4b1391f03402a))
+* wrap multi-release tp exclude build for now ([376a38f](https://github.com/PhearZero/npm-workflows/commit/376a38f5899c6e75e7113e7e99f754c66313c153))
+
+
+### Features
+
+* has metdata ([99ea915](https://github.com/PhearZero/npm-workflows/commit/99ea9150e1c6616c5c2746851f679bcaf9289307))
+* is number ([6b324bd](https://github.com/PhearZero/npm-workflows/commit/6b324bd342a91d78d5fd76f6e41ceba33750681c))
+* save metadata in Account class ([cee86ee](https://github.com/PhearZero/npm-workflows/commit/cee86ee2e3048fd20960296ec57c3d2016fd46da))
+
+# [core@1.2.0-canary.1](https://github.com/PhearZero/npm-workflows/compare/core@1.1.0...core@1.2.0-canary.1) (2026-04-01)
+
+
+### Bug Fixes
+
+* disable patch and test multi-semantic-release ([bbfc015](https://github.com/PhearZero/npm-workflows/commit/bbfc0158cb65493608d7e6a9fe746b94c04b10d3))
+* error in metadata save check ([20a87f3](https://github.com/PhearZero/npm-workflows/commit/20a87f30a88e12a0e122897e3edf06804a402788))
 * update release cli to use pnpm workspace replacement ([64f07ba](https://github.com/PhearZero/npm-workflows/commit/64f07ba44e4b96ec2142b35dbe657038afae0021))
 * wrap multi-release tp exclude build for now ([376a38f](https://github.com/PhearZero/npm-workflows/commit/376a38f5899c6e75e7113e7e99f754c66313c153))
 
