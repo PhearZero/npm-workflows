@@ -1,3 +1,10 @@
+# [core@1.0.0-canary.2](https://github.com/PhearZero/npm-workflows/compare/core@1.0.0-canary.1...core@1.0.0-canary.2) (2026-04-01)
+
+
+### Features
+
+* metadata ([393f7e5](https://github.com/PhearZero/npm-workflows/commit/393f7e562c4804a51e47631d312a90692ac6f545))
+
 # core@1.0.0-canary.1 (2026-04-01)
 
 
