@@ -1,6 +1,6 @@
 {
   "name": "@algofam/core",
-  "version": "1.2.0-canary.1",
+  "version": "1.2.0-canary.3",
   "main": "index.js",
   "license": "UNLICENSED",
   "publishConfig": {
