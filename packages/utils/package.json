@@ -4,6 +4,11 @@
   "main": "index.js",
   "type": "module",
   "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PhearZero/npm-workflows.git",
+    "directory": "packages/utils"
+  },
   "devDependencies": {
     "@algofam/package-releaser": "workspace:*"
   }
