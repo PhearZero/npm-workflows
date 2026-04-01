@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "main": "dist/bin.js",
+  "license": "UNLICENSED",
   "bin": {
     "package-releaser": "dist/bin.js"
   },
