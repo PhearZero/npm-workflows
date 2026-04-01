@@ -10,7 +10,7 @@ import semanticRelease from 'semantic-release'
 import semanticGetConfig from 'semantic-release/lib/get-config.js'
 
 import { createInlinePlugin } from './release.js'
-import { RescopedStream, VoidStream } from './stream.js'
+import { RescopedStream } from './stream.js'
 
 import pkg from '../../package.json' with { type: 'json' }
 
@@ -40,7 +40,9 @@ try {
     const rawSemanticConfig = await cosmiconfig('release').search(new URL('../../', import.meta.url).pathname)
 
     const packageName = monoPackage?.name?.replace('@algofam/', '')
+    console.log(`[${pkg.name}]: Processing package ${monoPackage?.name}`)
     if (monoPackage?.publishConfig?.provenance === true && !process.env.NPM_CONFIG_PROVENANCE) {
+        console.log(`[${pkg.name}]: Setting NPM_CONFIG_PROVENANCE=true for ${monoPackage.name}`)
         process.env.NPM_CONFIG_PROVENANCE = 'true'
     }
 
@@ -49,6 +51,7 @@ try {
         ...rawSemanticConfig?.config,
         ...cli.flags,
     }
+    console.log(`[${pkg.name}]: Using options ${JSON.stringify(options, null, 2)}`)
 
     if (options.plugins) {
         options.plugins = options.plugins.map((plugin) => {
@@ -76,7 +79,7 @@ try {
     const semanticConfig = await semanticGetConfig(
         {
             ...monoContext,
-            logger: new Signale({ stream: new VoidStream(1) }),
+            logger: new Signale({ stream: new RescopedStream(monoContext.stderr, pkg.name) }),
         },
         options,
     )

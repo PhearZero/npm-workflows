@@ -13,6 +13,7 @@ import { modifyContextCommits, modifyContextReleaseVersion } from './utils.js'
 export function createInlinePlugin(semanticConfig: SemanticConfigType) {
     // biome-ignore lint/suspicious/useAwait: semantic-release expect steps to return Promise
     const verifyConditions = async (_: Config, context: VerifyConditionsContext) => {
+        context.logger.log(`[@algofam/package-releaser]: Starting verifyConditions for ${context.cwd}`)
         return semanticConfig.plugins.verifyConditions(modifyContextCommits(context as any, semanticConfig))
     }
 
@@ -34,6 +35,7 @@ export function createInlinePlugin(semanticConfig: SemanticConfigType) {
     }
 
     const publish = async (_: Config, context: PublishContext) => {
+        context.logger.log(`[@algofam/package-releaser]: Starting publish for ${context.cwd}`)
         const [response] = await semanticConfig.plugins.publish(modifyContextCommits(context, semanticConfig))
 
         return response ?? {}
