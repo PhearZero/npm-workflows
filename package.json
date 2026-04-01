@@ -6,8 +6,8 @@
   "scripts": {
     "test": "pnpm run -r test",
     "build": "pnpm run -r --if-present build",
-    "release": "pnpm run -r --if-present release",
-    "release:dry-run": "pnpm run -r --if-present release:dry-run"
+    "release": "pnpm run -r --if-present --workspace-concurrency 1 release",
+    "release:dry-run": "pnpm run -r --if-present --workspace-concurrency 1 release:dry-run"
   },
   "keywords": [],
   "author": "",
