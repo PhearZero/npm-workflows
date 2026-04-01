@@ -1,3 +1,10 @@
+# [core@1.0.0-canary.5](https://github.com/PhearZero/npm-workflows/compare/core@1.0.0-canary.4...core@1.0.0-canary.5) (2026-04-01)
+
+
+### Bug Fixes
+
+* remove skip ci ([d0f2480](https://github.com/PhearZero/npm-workflows/commit/d0f24800ea3cba6a6e7b0616a4f05195564a43dd))
+
 # [core@1.0.0-canary.4](https://github.com/PhearZero/npm-workflows/compare/core@1.0.0-canary.3...core@1.0.0-canary.4) (2026-04-01)
 
 
