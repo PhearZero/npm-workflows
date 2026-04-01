@@ -15,6 +15,7 @@ export class Account {
     if(typeof metadata !== 'object') throw new Error("Metadata must be an object");
     this.metadata = metadata;
     this.hasMetadata = true;
+    this.shouldPublish = true;
   }
 }
 
