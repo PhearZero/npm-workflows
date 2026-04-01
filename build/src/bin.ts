@@ -39,7 +39,10 @@ try {
     const monoPackage = await readPackage().catch(() => null)
     const rawSemanticConfig = await cosmiconfig('release').search(new URL('../../', import.meta.url).pathname)
 
-    const packageName = monoPackage?.name?.replace('@algorandfoundation/', '')
+    const packageName = monoPackage?.name?.replace('@algofam/', '')
+    if (monoPackage?.publishConfig?.provenance === true && !process.env.NPM_CONFIG_PROVENANCE) {
+        process.env.NPM_CONFIG_PROVENANCE = 'true'
+    }
 
     const options: Options = {
         tagFormat: packageName ? `${packageName}@\${version}` : undefined,

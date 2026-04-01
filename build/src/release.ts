@@ -50,7 +50,7 @@ export function createInlinePlugin(semanticConfig: SemanticConfigType) {
     for (const value of Object.values(inlinePlugin)) {
         Reflect.defineProperty(value, 'pluginName', {
             enumerable: true,
-            value: '@algorandfoundation/extension-releaser-inline-plugin',
+            value: '@algofam/package-releaser-inline-plugin',
             writable: false,
         })
     }
