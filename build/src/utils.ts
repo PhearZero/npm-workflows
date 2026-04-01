@@ -47,7 +47,7 @@ interface PnpmWorkspace {
 export const memoizedGetWorkspaceManifest = memize(() => {
     try {
         const workspaces: PnpmWorkspace[] = JSON.parse(
-            execSync('pnpm list -r --depth -1 --json --no-frozen-lockfile').toString(),
+            execSync('pnpm list -r --depth -1 --json').toString(),
         )
         const workingDirectory = cwd()
         const rootDir = execSync('git rev-parse --show-toplevel').toString().trim()
@@ -136,7 +136,7 @@ export function modifyContextCommits<TContextType extends ContextWithCommits>(
 
 export function synchronizeWorkspaceDependencies(workingDirectory: string): void {
     const workspaces: PnpmWorkspace[] = JSON.parse(
-        execSync('pnpm list -r --depth -1 --json --no-frozen-lockfile').toString(),
+        execSync('pnpm list -r --depth -1 --json').toString(),
     )
     const pkgPath = path.join(workingDirectory, 'package.json')
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8'))
