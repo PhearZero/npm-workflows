@@ -13,3 +13,5 @@ export class Account {
 }
 
 export default Account;
+
+export function isAccount(account) { return account instanceof Account; }
