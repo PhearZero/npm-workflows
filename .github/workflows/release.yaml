@@ -22,6 +22,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm run --if-present build
+      - run: pnpm install # fix broken workspace for binaries
       - name: Release
         run: pnpm run release
         env:
