@@ -4,6 +4,13 @@
   "main": "index.js",
   "type": "module",
   "license": "UNLICENSED",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "release": "package-releaser"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/PhearZero/npm-workflows.git",
