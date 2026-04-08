@@ -1,3 +1,10 @@
+# [core@1.2.0-canary.6](https://github.com/PhearZero/npm-workflows/compare/core@1.2.0-canary.5...core@1.2.0-canary.6) (2026-04-08)
+
+
+### Features
+
+* core peer dependencies ([9536534](https://github.com/PhearZero/npm-workflows/commit/9536534eeabbd19fc406101432b9edddb8377c05))
+
 # [core@1.2.0-canary.5](https://github.com/PhearZero/npm-workflows/compare/core@1.2.0-canary.4...core@1.2.0-canary.5) (2026-04-08)
 
 
