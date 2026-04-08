@@ -1,3 +1,10 @@
+# [core@1.2.0-canary.5](https://github.com/PhearZero/npm-workflows/compare/core@1.2.0-canary.4...core@1.2.0-canary.5) (2026-04-08)
+
+
+### Bug Fixes
+
+* catalog dependencies and update ([4be3364](https://github.com/PhearZero/npm-workflows/commit/4be33647c62e89fa5eb6c76d74f64a3382c0a994))
+
 # [core@1.2.0-canary.4](https://github.com/PhearZero/npm-workflows/compare/core@1.2.0-canary.3...core@1.2.0-canary.4) (2026-04-01)
 
 
