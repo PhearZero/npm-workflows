@@ -4,6 +4,12 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    lodash:
+      specifier: 4.17.21
+      version: 4.17.21
+
 patchedDependencies:
   '@semantic-release/npm@13.1.5':
     hash: f8fb36b515bbe8990c2498aa928100d1676d2af288ea16a4656a8827c9458e76
@@ -62,14 +68,21 @@ importers:
   packages/core:
     dependencies:
       '@algofam/utils':
-        specifier: 1.1.0-canary.2
-        version: 1.1.0-canary.2
+        specifier: workspace:*
+        version: link:../utils
+      lodash:
+        specifier: 'catalog:'
+        version: 4.17.21
     devDependencies:
       '@algofam/package-releaser':
         specifier: workspace:*
         version: link:../../build
 
   packages/utils:
+    dependencies:
+      lodash:
+        specifier: 'catalog:'
+        version: 4.17.21
     devDependencies:
       '@algofam/package-releaser':
         specifier: workspace:*
@@ -88,9 +101,6 @@ packages:
 
   '@actions/io@3.0.2':
     resolution: {integrity: sha512-nRBchcMM+QK1pdjO7/idu86rbJI5YHUKCvKs0KxnSYbVe3F51UfGxuZX4Qy/fWlp6l7gWFwIkrOzN+oUK03kfw==}
-
-  '@algofam/utils@1.1.0-canary.2':
-    resolution: {integrity: sha512-DvZGvV6ImaZFkGHFw/gRN4NtRKqPYq0rHCGWGlr5BSPGkoHk/vORshedhvJHkffWu5ADLNstJrmQNnvvn1pL4w==}
 
   '@babel/code-frame@7.29.0':
     resolution: {integrity: sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw==}
@@ -1706,8 +1716,6 @@ snapshots:
       undici: 6.24.1
 
   '@actions/io@3.0.2': {}
-
-  '@algofam/utils@1.1.0-canary.2': {}
 
   '@babel/code-frame@7.29.0':
     dependencies:

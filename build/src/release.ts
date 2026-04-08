@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import type {
     AnalyzeCommitsContext,
     Config,
@@ -5,47 +7,75 @@ import type {
     PrepareContext,
     PublishContext,
     VerifyConditionsContext,
-} from 'semantic-release'
-import type { SemanticConfigType } from 'semantic-release/lib/get-config.js'
+} from "semantic-release";
+import type { SemanticConfigType } from "semantic-release/lib/get-config.js";
 
-import { modifyContextCommits, modifyContextReleaseVersion, synchronizeWorkspaceDependencies, updateLockfile } from './utils.js'
+import {
+    modifyContextCommits,
+    modifyContextReleaseVersion,
+    synchronizeWorkspaceDependencies,
+    updateLockfile,
+} from "./utils.js";
 
 export function createInlinePlugin(semanticConfig: SemanticConfigType) {
     // biome-ignore lint/suspicious/useAwait: semantic-release expect steps to return Promise
     const verifyConditions = async (_: Config, context: VerifyConditionsContext) => {
-        context.logger.log(`[@algofam/package-releaser]: Starting verifyConditions for ${context.cwd}`)
-        return semanticConfig.plugins.verifyConditions(modifyContextCommits(context as any, semanticConfig))
-    }
+        context.logger.log(
+            `[@algorandfoundation/package-releaser]: Starting verifyConditions for ${context.cwd}`,
+        );
+        return semanticConfig.plugins.verifyConditions(
+            modifyContextCommits(context as any, semanticConfig),
+        );
+    };
 
     // biome-ignore lint/suspicious/useAwait: semantic-release expect steps to return Promise
     const analyzeCommits = async (_: Config, context: AnalyzeCommitsContext) => {
-        return semanticConfig.plugins.analyzeCommits(modifyContextCommits(context, semanticConfig))
-    }
+        return semanticConfig.plugins.analyzeCommits(modifyContextCommits(context, semanticConfig));
+    };
 
     // biome-ignore lint/suspicious/useAwait: semantic-release expect steps to return Promise
     const generateNotes = async (_: Config, context: GenerateNotesContext) => {
         return semanticConfig.plugins.generateNotes(
             modifyContextCommits(modifyContextReleaseVersion(context), semanticConfig),
-        )
-    }
+        );
+    };
 
     // biome-ignore lint/suspicious/useAwait: semantic-release expect steps to return Promise
     const prepare = async (_: Config, context: PrepareContext) => {
-        context.logger.log(`[@algofam/package-releaser]: Starting prepare for ${context.cwd}`)
-        if (context.cwd) {
-            synchronizeWorkspaceDependencies(context.cwd)
-        }
-        const result = await semanticConfig.plugins.prepare(modifyContextCommits(context, semanticConfig))
-        updateLockfile()
-        return result
-    }
+        context.logger.log(
+            `[@algorandfoundation/package-releaser]: Starting prepare for ${context.cwd}`,
+        );
+        const result = await semanticConfig.plugins.prepare(
+            modifyContextCommits(context, semanticConfig),
+        );
+        updateLockfile();
+        return result;
+    };
 
     const publish = async (_: Config, context: PublishContext) => {
-        context.logger.log(`[@algofam/package-releaser]: Starting publish for ${context.cwd}`)
-        const [response] = await semanticConfig.plugins.publish(modifyContextCommits(context, semanticConfig))
+        const { cwd = "." } = context;
+        context.logger.log(
+            `[@algorandfoundation/package-releaser]: Starting publish for ${cwd}`,
+        );
+        const pkgPath = path.join(cwd, "package.json");
+        const originalPkgContent = fs.readFileSync(pkgPath, "utf-8");
 
-        return response ?? {}
-    }
+        try {
+            if (cwd) {
+                synchronizeWorkspaceDependencies(cwd);
+            }
+            const [response] = await semanticConfig.plugins.publish(
+                modifyContextCommits(context, semanticConfig),
+            );
+            return response ?? {};
+        } finally {
+            const newPkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
+            const restoredPkg = JSON.parse(originalPkgContent);
+            restoredPkg.version = newPkg.version;
+            fs.writeFileSync(pkgPath, `${JSON.stringify(restoredPkg, null, 2)}\n`);
+            updateLockfile();
+        }
+    };
 
     const inlinePlugin = {
         verifyConditions,
@@ -53,15 +83,15 @@ export function createInlinePlugin(semanticConfig: SemanticConfigType) {
         generateNotes,
         prepare,
         publish,
-    }
+    };
 
     for (const value of Object.values(inlinePlugin)) {
-        Reflect.defineProperty(value, 'pluginName', {
+        Reflect.defineProperty(value, "pluginName", {
             enumerable: true,
-            value: '@algofam/package-releaser-inline-plugin',
+            value: "@algorandfoundation/package-releaser-inline-plugin",
             writable: false,
-        })
+        });
     }
 
-    return inlinePlugin
+    return inlinePlugin;
 }

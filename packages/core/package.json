@@ -17,7 +17,8 @@
   },
   "type": "module",
   "dependencies": {
-    "@algofam/utils": "1.1.0-canary.2"
+    "@algofam/utils": "workspace:*",
+    "lodash": "catalog:"
   },
   "devDependencies": {
     "@algofam/package-releaser": "workspace:*"

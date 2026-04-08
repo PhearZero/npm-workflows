@@ -16,6 +16,9 @@
     "url": "https://github.com/PhearZero/npm-workflows.git",
     "directory": "packages/utils"
   },
+  "dependencies": {
+    "lodash": "catalog:"
+  },
   "devDependencies": {
     "@algofam/package-releaser": "workspace:*"
   }
