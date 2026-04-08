@@ -5,3 +5,4 @@ patchedDependencies:
   '@semantic-release/npm@13.1.5': patches/@semantic-release__npm@13.1.5.patch
 catalog:
   lodash: 4.17.21
+  react: 18.2.0

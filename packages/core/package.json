@@ -20,6 +20,9 @@
     "@algofam/utils": "workspace:*",
     "lodash": "catalog:"
   },
+  "peerDependencies": {
+    "react": "catalog:"
+  },
   "devDependencies": {
     "@algofam/package-releaser": "workspace:*"
   }
